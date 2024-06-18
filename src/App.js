@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import BreadCrumb from './Components/BreadCrumb';
 import InputWrapper from "./Components/InputWrapper";
 import TodoDisplayWrapper from "./Components/TodoDisplayWrapper";
@@ -8,6 +8,27 @@ function App() {
   const [todoList,setTodoList] = useState([]);
   const [editItem,setEditItem] = useState({});
 
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      localStorage.setItem('todoList', JSON.stringify(todoList));
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [todoList]);
+
+  
+
+
+  useEffect(() => {
+    const storedTodoList = JSON.parse(localStorage.getItem('todoList'));
+    if (storedTodoList) {
+      setTodoList(storedTodoList);
+    }
+  }, []);
 
   const handleEdit = (id,item) => {
       setEditItem({id: id,item: item});

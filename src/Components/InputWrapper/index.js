@@ -13,6 +13,7 @@ const FORM_INITIAL_STATE = {
 const InputWrapper = ({setTodoList, handleEditSave,editItem}) => {
     const [formData, setFormData] = useState(FORM_INITIAL_STATE)
     const [errors, setErrors] = useState({});
+    const [flag,setFlag] = useState(false);
 
     useEffect(()=>{
         setFormData(formData =>  editItem.hasOwnProperty('id') ? editItem?.item : formData)
@@ -32,7 +33,7 @@ const InputWrapper = ({setTodoList, handleEditSave,editItem}) => {
         if (!formData.todo) {
             tempErrors.todo = 'This field is required';
         }
-        if(formData.priority !== 'hight' || formData.priority!== 'low' || formData.priority!=='medium'){
+        if(formData.priority !== 'high' && formData.priority!== 'low' && formData.priority!=='medium'){
             tempErrors.priority = 'Please enter high or low or medium'
         }
         return tempErrors;
@@ -48,30 +49,33 @@ const InputWrapper = ({setTodoList, handleEditSave,editItem}) => {
                 setTodoList(todoList => [...todoList,formData]);
             }
             setFormData(FORM_INITIAL_STATE);
+            setErrors({})
+            setFlag(false);
         } else {
             setErrors(tempErrors);
         }
     };    
 
     return (
-        <div className="form">
-            <Stack spacing={2} direction="col">
-                <form onSubmit={handleSubmit}>
-                    <div>  
-                        <InputField label="Enter Todo*" name={"todo"} field={formData.todo} setField={handleChange}/>
-                        {errors.todo && <p style={{ color: 'red' }}>{errors.todo}</p>}
-                    </div>
-                    <div>
-                        <InputField label="Enter Description" name={"description"} field={formData.description} setField={handleChange}/>
-                    </div>
-                    <div>
-                        <InputField label="Enter Priority" name={"priority"} field={formData.priority} setField={handleChange}/>
-                        {errors.priority && <p style={{ color: 'red' }}>{errors.priority}</p>}
-                    </div>
-                    <Button type="submit">Submit</Button>
-                </form>
-            </Stack>
-        </div>
+        
+        flag ? <div className="form">
+            <form onSubmit={handleSubmit}>
+                <div className="appendTop">  
+                    <InputField label="Enter Todo*" name={"todo"} field={formData.todo} setField={handleChange}/>
+                    {errors.todo && <p style={{ color: 'red' }}>{errors.todo}</p>}
+                </div>
+                <div className="appendTop">
+                    <InputField label="Enter Description" name={"description"} field={formData.description} setField={handleChange}/>
+                </div>
+                <div className="appendTop">
+                    <InputField label="Enter Priority" name={"priority"} field={formData.priority} setField={handleChange}/>
+                    {errors.priority && <p style={{ color: 'red' }}>{errors.priority}</p>}
+                </div>
+                <div className="appendTop">
+                    <Button type="submit" variant="contained">Add todo</Button>
+                </div>
+            </form>
+        </div> : <div className="appendBottom"> <Button variant="contained" type="button" onClick={e => setFlag(true)}>Create Todo</Button></div>
     )
 }
 

@@ -42,7 +42,7 @@ const TodoDisplayWrapper = ({todoList, handleEdit, handleDelete}) => {
 
     return (
         <>
-          {list?.length && <GroupRadio handleChange={handleSort}/>}  
+          {list?.length ? <GroupRadio handleChange={handleSort}/> : null}  
           {list.length ? list.map((item, idx) => (
             <Box key={idx} sx={{ minWidth: 275 }}>
               <TodoCard variant="outlined" key = {idx} todo={item?.todo} priority={item?.priority} description={item?.description}/>
