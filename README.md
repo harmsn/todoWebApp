@@ -1,6 +1,13 @@
-# Getting Started with Create React App
+#Todo App
+This is a simple Todo application built with React that allows users to create, edit, delete, and sort tasks by priority. The application also stores data in local storage to retain the list of tasks across page refreshes.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+##Add Todo: Add new tasks to your todo list.
+##Edit Todo: Edit existing tasks.
+##Delete Todo: Delete tasks from the list.
+##Sort by Priority: Sort tasks by priority (high, medium, low).
+##Persist Data: Store tasks in local storage to retain data on page refresh
+
 
 ## Available Scripts
 
