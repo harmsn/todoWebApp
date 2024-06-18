@@ -1,24 +1,39 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from "react";
+import BreadCrumb from './Components/BreadCrumb';
+import InputWrapper from "./Components/InputWrapper";
+import TodoDisplayWrapper from "./Components/TodoDisplayWrapper";
 import './App.css';
 
 function App() {
+  const [todoList,setTodoList] = useState([]);
+  const [editItem,setEditItem] = useState({});
+
+
+  const handleEdit = (id,item) => {
+      setEditItem({id: id,item: item});
+  }
+
+  const handleEditSave = ({item,idx}) => {
+    const newItems = [...todoList];
+    newItems[idx] = item;
+
+    setTodoList(newItems);
+    setEditItem({});
+  }
+
+  const handleDelete = (id) => {
+    const newItems = todoList.filter((_, i) => i !== id);
+    setTodoList(newItems);
+  }  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BreadCrumb />
+      <div>
+        <InputWrapper handleEditSave={handleEditSave} editItem={editItem} setEditItem={setEditItem} setTodoList={setTodoList}/>
+      </div>
+      <TodoDisplayWrapper handleDelete={handleDelete} handleEdit={handleEdit} todoList={todoList}/>
+    </>
   );
 }
 
