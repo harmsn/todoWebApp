@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import BreadCrumb from './Components/BreadCrumb';
 import InputWrapper from "./Components/InputWrapper";
 import TodoDisplayWrapper from "./Components/TodoDisplayWrapper";
@@ -29,10 +29,10 @@ function App() {
   return (
     <>
       <BreadCrumb />
-      <div>
+      <div className="wrapper"> 
         <InputWrapper handleEditSave={handleEditSave} editItem={editItem} setEditItem={setEditItem} setTodoList={setTodoList}/>
+        <TodoDisplayWrapper handleDelete={handleDelete} handleEdit={handleEdit} todoList={todoList}/>
       </div>
-      <TodoDisplayWrapper handleDelete={handleDelete} handleEdit={handleEdit} todoList={todoList}/>
     </>
   );
 }
