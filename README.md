@@ -8,6 +8,13 @@ Features
 ## Sort by Priority: Sort tasks by priority (high, medium, low).
 ## Persist Data: Store tasks in local storage to retain data on page refresh
 
+# Future Enhancements
+## State Management with Redux: Integrate Redux for better state management, especially as the application grows.
+## Styling: Enhance the user interface with CSS or a UI framework like Material-UI or Bootstrap.
+## User Authentication: Add user authentication to save todos for individual users.
+## Due Dates: Add due dates for tasks and sort by due date.
+## Search and Filter: Implement search and filter functionalities to quickly find tasks.
+## Notifications: Add notifications or reminders for high-priority or due tasks.
 
 ## Available Scripts
 
